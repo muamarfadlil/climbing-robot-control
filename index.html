@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Climbing Robot by Mu'amar Fadlil</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background: linear-gradient(120deg, #000080, #008000);
+        color: #ffffff; /* Ubah warna teks menjadi putih */
+      }
+      h1 {
+        margin-top: 50px;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 80vh;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 150px;
+      }
+      .forward {
+        background-color: #4caf50;
+        color: white;
+      }
+      .left {
+        background-color: #f44336;
+        color: white;
+      }
+      .stop {
+        background-color: #808080;
+        color: white;
+      }
+      .right {
+        background-color: #2196f3;
+        color: white;
+      }
+      .backward {
+        background-color: #ffc107;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Climbing Robot by Mu'amar Fadlil</h1>
+    <img
+      src="climbingrobot.png"
+      alt="Climbing Robot"
+      style="width: 100px; height: auto; margin-top: 10px"
+    />
+    <p style="margin-top: 20px">
+      A climbing robot designed by Mu'amar Fadlil to navigate various terrains
+      efficiently and effectively.
+    </p>
+    <div class="container">
+      <div class="buttons">
+        <button class="forward" onclick="move('forward')">Forward</button>
+        <br />
+        <button class="left" onclick="move('left')">Left</button>
+        <button class="stop" onclick="move('stop')">Stop</button>
+        <button class="right" onclick="move('right')">Right</button>
+        <br />
+        <button class="backward" onclick="move('backward')">Backward</button>
+      </div>
+    </div>
+
+    <script>
+      function move(direction) {
+        fetch("http://192.168.169.12/" + direction)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
+      }
+    </script>
+  </body>
+</html>
