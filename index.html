@@ -9,7 +9,7 @@
         padding: 0;
         text-align: center;
         background: linear-gradient(120deg, #000080, #008000);
-        color: #ffffff; /* Ubah warna teks menjadi putih */
+        color: #ffffff;
       }
       h1 {
         margin-top: 50px;
@@ -22,38 +22,54 @@
         height: 80vh;
       }
       .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
       }
       button {
-        font-size: 20px;
-        padding: 10px 20px;
-        margin: 10px;
+        font-size: 16px;
+        padding: 10px;
         border: none;
         cursor: pointer;
         border-radius: 5px;
-        width: 150px;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
       }
       .forward {
         background-color: #4caf50;
-        color: white;
       }
       .left {
         background-color: #f44336;
-        color: white;
       }
       .stop {
         background-color: #808080;
-        color: white;
       }
       .right {
         background-color: #2196f3;
-        color: white;
       }
       .backward {
         background-color: #ffc107;
-        color: white;
+      }
+      .rotate-left {
+        background-color: #673ab7;
+      }
+      .rotate-right {
+        background-color: #e91e63;
+      }
+      .strafe-left {
+        background-color: #ff5722;
+      }
+      .strafe-right {
+        background-color: #009688;
+      }
+      i {
+        font-size: 24px;
+        margin-bottom: 5px;
       }
     </style>
   </head>
@@ -70,19 +86,48 @@
     </p>
     <div class="container">
       <div class="buttons">
-        <button class="forward" onclick="move('forward')">Forward</button>
-        <br />
-        <button class="left" onclick="move('left')">Left</button>
-        <button class="stop" onclick="move('stop')">Stop</button>
-        <button class="right" onclick="move('right')">Right</button>
-        <br />
-        <button class="backward" onclick="move('backward')">Backward</button>
+        <button class="rotate-left" onclick="move('rotate-left')">
+          <i class="fa fa-undo"></i>
+          Rotate Left
+        </button>
+        <button class="forward" onclick="move('forward')">
+          <i class="fa fa-arrow-up"></i>
+          Forward
+        </button>
+        <button class="rotate-right" onclick="move('rotate-right')">
+          <i class="fa fa-redo"></i>
+          Rotate Right
+        </button>
+        <button class="strafe-left" onclick="move('strafe-left')">
+          <i class="fa fa-arrow-left"></i>
+          Strafe Left
+        </button>
+        <button class="stop" onclick="move('stop')">
+          <i class="fa fa-stop"></i>
+          Stop
+        </button>
+        <button class="strafe-right" onclick="move('strafe-right')">
+          <i class="fa fa-arrow-right"></i>
+          Strafe Right
+        </button>
+        <button class="left" onclick="move('left')">
+          <i class="fa fa-angle-left"></i>
+          Left
+        </button>
+        <button class="backward" onclick="move('backward')">
+          <i class="fa fa-arrow-down"></i>
+          Backward
+        </button>
+        <button class="right" onclick="move('right')">
+          <i class="fa fa-angle-right"></i>
+          Right
+        </button>
       </div>
     </div>
 
     <script>
       function move(direction) {
-        fetch("http://muamarfadlil.my.id/" + direction)
+        fetch("http://192.168.202.12/" + direction)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -97,5 +142,9 @@
           });
       }
     </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
   </body>
 </html>
